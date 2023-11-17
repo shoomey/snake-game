@@ -1,0 +1,107 @@
+WindowManager:
+    MenuScreen:
+    SettingsScreen:
+    GameScreen:
+
+<MenuScreen>:
+    FloatLayout:
+        id : menu
+        size: root.width, root.height
+        canvas.before:
+            Color:
+                rgb: (19/255, 21/255, 22/255)
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Image:
+            source: "snake.png"
+            pos_hint: {'center_x': 0.5, 'center_y': 0.7}
+            size_hint: 0.2, 0.2
+            
+        Label:
+            id : made_by
+            text : "SNAKE"
+            color: 170/255, 170/255, 170/255
+            markup : True
+            halign: 'center'
+            valign: 'middle'
+            font_size : 70
+            size_hint : 0.2, 0.1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            anchor_x: 'center'
+        Button:
+            text : "START GAME"
+            color: 170/255, 170/255, 170/255
+            background_color: 120/255, 120/255, 120/255
+            size_hint : 0.2, 0.05
+            pos_hint : {"x" : 0.4, "y" : 0.4}
+            on_release:
+                root.start_game()
+        Button:
+            text : "SETTINGS"
+            color: 170/255, 170/255, 170/255
+            background_color: 120/255, 120/255, 120/255
+            size_hint : 0.2, 0.05
+            pos_hint : {"x" : 0.4, "y" : 0.33}
+            on_release:
+                root.go_to_settings()
+        
+<SettingsScreen>:
+    FloatLayout:
+        id: settings
+        size: root.width, root.height
+        canvas.before:
+            Color:
+                rgb: (19/255, 21/255, 22/255)
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Button:
+            text: 'BACK'
+            color: 170/255, 170/255, 170/255
+            background_color: 120/255, 120/255, 120/255
+            size_hint: 0.2, 0.05
+            pos_hint: {"x" : 0.7, "y" : 0.92}
+            on_release:
+                root.go_to_menu()
+
+        Button:
+            id: btn
+            text: 'DIFFICULTY'
+            color: 170/255, 170/255, 170/255
+            background_color: 120/255, 120/255, 120/255
+            on_parent: dropdown.dismiss()
+            on_release: dropdown.open(self)
+            size_hint : 0.2, 0.05
+            pos_hint : {"x" : 0.4, "y" : 0.8}
+
+        DropDown:
+            id: dropdown
+            on_select: btn.text = '{}'.format(args[1])
+
+            Button:
+                text: 'EASY'
+                color: 170/255, 170/255, 170/255
+                background_color: 120/255, 120/255, 120/255
+                size_hint_y: None
+                height: 50
+                on_release: dropdown.select('EASY')
+
+            Button:
+                text: 'MEDIUM'
+                color: 170/255, 170/255, 170/255
+                background_color: 120/255, 120/255, 120/255
+                size_hint_y: None
+                height: 50
+                on_release: dropdown.select('MEDIUM')
+
+            Button:
+                text: 'HARD'
+                color: 170/255, 170/255, 170/255
+                background_color: 120/255, 120/255, 120/255
+                size_hint_y: None
+                height: 50
+                on_release: dropdown.select('HARD')
+
+            
